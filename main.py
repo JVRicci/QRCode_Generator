@@ -6,22 +6,19 @@ import pyperclip
 def generate_qrcode():
     url = website_entry.get()
 
-    if len(url) == 0 or not url.startswith('http'):
-        messagebox.showinfo(
-            title="Erro!",
-            message="Favor insira uma URL válida")
+    if len(url) == 0 or not url.startswith("http"):
+        messagebox.showinfo(title="Erro!", message="Favor insira uma URL válida")
     else:
         opcao_escolhida = messagebox.askokcancel(
             title=url,
-            message=f"Endereço: {url} \n "
-                    f"Pronto para salvar?")
+            message=f"Endereço: {url} \nPronto para salvar?")
 
         if opcao_escolhida:
             qr = qrcode.QRCode(version = 1, box_size = 10, border = 5)
             qr.add_data(url)
             qr.make(fit=True)
-            img = qr.make_image(fill_color='black', back_color='white')
-            img.save('qrExport.png')
+            img = qr.make_image(fill_color="black", back_color="white")
+            img.save("qrExport.png")
             show_qrcode()
 
 def paste_url():
@@ -36,7 +33,7 @@ def show_qrcode():
         img = img.resize((200, 200), Image.LANCZOS)
         photo = ImageTk.PhotoImage(img)
 
-        if 'img_label' not in globals():
+        if "img_label" not in globals():
             img_label = Label(window, image = photo)
             img_label.image = photo
             img_label.grid(row = 6, column = 1, columnspan = 2)
@@ -54,7 +51,7 @@ def show_qrcode():
     label.grid(row = 6, column = 1, columnspan = 2)
     
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     window = Tk()
     window.title("Gerador de Código QR")
     window.config(padx = 20, pady = 10)
